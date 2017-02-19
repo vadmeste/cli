@@ -172,10 +172,13 @@ func ExampleApp_Run_commandHelp() {
 	//    greet describeit - use it to see a description
 	//
 	// USAGE:
-	//    greet describeit [arguments...]
+	//    greet describeit [command options] [arguments...]
 	//
 	// DESCRIPTION:
 	//    This is how we describe describeit the function
+	//
+	// OPTIONS:
+	//    --help, -h  show help
 }
 
 func ExampleApp_Run_noAction() {
@@ -213,10 +216,13 @@ func ExampleApp_Run_subcommandNoAction() {
 	//     describeit - use it to see a description
 	//
 	// USAGE:
-	//     describeit [arguments...]
+	//     describeit [command options] [arguments...]
 	//
 	// DESCRIPTION:
 	//    This is how we describe describeit the function
+	//
+	// OPTIONS:
+	//    --help, -h  show help
 
 }
 
@@ -1516,7 +1522,7 @@ func TestApp_Run_SubcommandFullPath(t *testing.T) {
 	if !strings.Contains(output, "command foo bar - does bar things") {
 		t.Errorf("expected full path to subcommand: %s", output)
 	}
-	if !strings.Contains(output, "command foo bar [arguments...]") {
+	if !strings.Contains(output, "command foo bar [command options] [arguments...]") {
 		t.Errorf("expected full path to subcommand: %s", output)
 	}
 }
@@ -1547,7 +1553,7 @@ func TestApp_Run_SubcommandHelpName(t *testing.T) {
 	if !strings.Contains(output, "custom - does bar things") {
 		t.Errorf("expected HelpName for subcommand: %s", output)
 	}
-	if !strings.Contains(output, "custom [arguments...]") {
+	if !strings.Contains(output, "custom [command options] [arguments...]") {
 		t.Errorf("expected HelpName to subcommand: %s", output)
 	}
 }
@@ -1578,7 +1584,7 @@ func TestApp_Run_CommandHelpName(t *testing.T) {
 	if !strings.Contains(output, "command foo bar - does bar things") {
 		t.Errorf("expected full path to subcommand: %s", output)
 	}
-	if !strings.Contains(output, "command foo bar [arguments...]") {
+	if !strings.Contains(output, "command foo bar [command options] [arguments...]") {
 		t.Errorf("expected full path to subcommand: %s", output)
 	}
 }
@@ -1680,7 +1686,7 @@ func TestApp_Run_Version(t *testing.T) {
 func TestApp_Run_Categories(t *testing.T) {
 	app := NewApp()
 	app.Name = "categories"
-	app.HideHelp = true
+	app.HideHelpCommand = true
 	app.Commands = []Command{
 		{
 			Name:     "command1",
@@ -1730,7 +1736,7 @@ func TestApp_Run_Categories(t *testing.T) {
 func TestApp_VisibleCategories(t *testing.T) {
 	app := NewApp()
 	app.Name = "visible-categories"
-	app.HideHelp = true
+	app.HideHelpCommand = true
 	app.Commands = []Command{
 		{
 			Name:     "command1",
@@ -1770,7 +1776,7 @@ func TestApp_VisibleCategories(t *testing.T) {
 
 	app = NewApp()
 	app.Name = "visible-categories"
-	app.HideHelp = true
+	app.HideHelpCommand = true
 	app.Commands = []Command{
 		{
 			Name:     "command1",
@@ -1805,7 +1811,7 @@ func TestApp_VisibleCategories(t *testing.T) {
 
 	app = NewApp()
 	app.Name = "visible-categories"
-	app.HideHelp = true
+	app.HideHelpCommand = true
 	app.Commands = []Command{
 		{
 			Name:     "command1",
