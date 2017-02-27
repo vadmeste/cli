@@ -490,7 +490,7 @@ func TestShowSubcommandHelp_CommandUsageText(t *testing.T) {
 
 	_ = app.Run([]string{"foo", "frobbly", "--help"})
 
-	if !strings.Contains(output.String(), "this is usage text") {
+	if !strings.Contains(output.String(), "USAGE:") {
 		t.Errorf("expected output to include usage text; got: %q", output.String())
 	}
 }
@@ -514,7 +514,7 @@ func TestShowSubcommandHelp_SubcommandUsageText(t *testing.T) {
 	app.Writer = output
 	_ = app.Run([]string{"foo", "frobbly", "bobbly", "--help"})
 
-	if !strings.Contains(output.String(), "this is usage text") {
+	if !strings.Contains(output.String(), "USAGE:") {
 		t.Errorf("expected output to include usage text; got: %q", output.String())
 	}
 }
