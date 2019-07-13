@@ -170,13 +170,6 @@ func (a *App) Setup() {
 		if c.HelpName == "" {
 			c.HelpName = fmt.Sprintf("%s %s", a.HelpName, c.Name)
 		}
-		// Set c.Prompt only if it is empty, to avoid
-		// overwriting user's setting, if any
-		if c.Prompt == "" {
-			c.Prompt = a.Prompt
-		}
-		c.EnvVarSetCommand = a.EnvVarSetCommand
-		c.AssignmentOperator = a.AssignmentOperator
 		newCmds = append(newCmds, c)
 	}
 	a.Commands = newCmds

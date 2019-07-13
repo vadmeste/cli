@@ -65,6 +65,7 @@ type Command struct {
 	// Full name of command for help, defaults to full command name, including parent commands.
 	HelpName        string
 	commandNamePath []string
+
 	// Default prompt, specific to OS
 	Prompt string
 	// Command to set the environment variable, specific to OS
