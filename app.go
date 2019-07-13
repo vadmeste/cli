@@ -6,9 +6,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"runtime"
 	"sort"
-	"strings"
 	"time"
 )
 
@@ -103,12 +101,6 @@ type App struct {
 	// single-character bool arguements into one
 	// i.e. foobar -o -v -> foobar -ov
 	UseShortOptionHandling bool
-	// default prompt for the OS
-	Prompt string
-	// command to set the environment variable for the OS
-	EnvVarSetCommand string
-	// Assignment operator for the OS
-	AssignmentOperator string
 
 	didSetup bool
 }
@@ -153,30 +145,10 @@ func (a *App) Setup() {
 	}
 
 	var newCmds []Command
-	if strings.ToLower(runtime.GOOS) == "windows" {
-		if a.Prompt == "" {
-			a.Prompt = "C:\\>"
-		}
-		a.EnvVarSetCommand = "set"
-		a.AssignmentOperator = "="
-	} else {
-		// Linux/Unix settings assume bash only.
-		a.Prompt = "$"
-		a.EnvVarSetCommand = "export"
-		a.AssignmentOperator = "="
-	}
-
 	for _, c := range a.Commands {
 		if c.HelpName == "" {
 			c.HelpName = fmt.Sprintf("%s %s", a.HelpName, c.Name)
 		}
-		// Set c.Prompt only if it is empty, to avoid
-		// overwriting user's setting, if any
-		if c.Prompt == "" {
-			c.Prompt = a.Prompt
-		}
-		c.EnvVarSetCommand = a.EnvVarSetCommand
-		c.AssignmentOperator = a.AssignmentOperator
 		newCmds = append(newCmds, c)
 	}
 	a.Commands = newCmds
