@@ -207,6 +207,14 @@ func ShowCommandHelp(ctx *Context, command string) error {
 			c.AssignmentOperator = defaultAssignmentOperator
 		}
 
+		if c.DisableHistory == "" {
+			c.DisableHistory = defaultDisableHistory
+		}
+
+		if c.EnableHistory == "" {
+			c.EnableHistory = defaultEnableHistory
+		}
+
 		if c.HasName(command) {
 			templ := c.CustomHelpTemplate
 			if templ == "" {
